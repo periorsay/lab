@@ -1,0 +1,108 @@
+@use '../extension' as *;
+
+
+:root {
+  // Width
+  --width-max: 1440px;
+  --width-max-inner: 1160px;
+
+  // Offset
+  --offset: #{responsive-size(375, 1440, 20, 40, 'px')};
+  --offset-l: #{responsive-size(992, 1440, 100, 140, 'px')};
+
+  // Grid
+  --grid-gutter: #{responsive-size(375, 1440, 19, 40, 'px')};
+
+  // VI Color
+  --color-vi-01: #009cb7;
+  --color-vi-02: #1b67b2;
+  --color-vi-03: #00528d;
+  --color-vi-04: #535d64;
+  --color-vi-05: #9fa0a0;
+  --color-vi-06: #e6e6e6;
+
+  // UI Color
+  --color-ui-black: #161819;
+  --color-ui-white: #fff;
+  --color-ui-gray-line: #ddd;
+  --color-ui-gray-text: #636f78;
+  --color-ui-blue-bg: #ebf2f8;
+  --color-ui-red: #e31e23;
+
+  // Gradient
+  --grad-vi: linear-gradient(359.94deg, #00528d -1.2%, #00adb2 99.42%);
+  --grad-bg: linear-gradient(0.29deg, #00528d 0.25%, #008096 99.75%);
+  --grad-foot: linear-gradient(301.83deg, #00528d 30.85%, #008096 100%);
+
+  // Spacing
+  --spacing-01: #{responsive-size(375, 1440, 80, 160, 'rem')};
+  --spacing-02: #{responsive-size(375, 1440, 60, 120, 'rem')};
+  --spacing-03: #{responsive-size(375, 1440, 40, 80, 'rem')};
+  --spacing-04: #{responsive-size(375, 1440, 40, 60, 'rem')};
+  --spacing-05: #{responsive-size(375, 1440, 30, 40, 'rem')};
+  --spacing-06: 3rem;
+  --spacing-07: 2rem;
+  --spacing-08: 1rem;
+  --header-height: #{calc(
+ responsive-size(375, 1440, 36, 40, 'rem')+responsive-size(375, 1440, 14, 20, 'rem') * 2+2rem)
+}
+
+;
+
+@include mq-max(md) {
+  --header-height: #{calc(
+ responsive-size(375, 1440, 36, 40, 'rem')+responsive-size(375, 1440, 14, 20, 'rem') * 2)
+}
+
+;
+}
+
+// Font Family
+--font-family-headline: 'Marcellus',
+serif;
+--font-family-ja: 'YuGothic',
+'Yu Gothic',
+'Hiragino Sans',
+'ヒラギノ角ゴ ProN',
+'Hiragino Kaku Gothic ProN',
+'Hiragino Kaku Gothic Pro',
+'メイリオ',
+meiryo,
+'MS Pゴシック',
+'MS PGothic',
+sans-serif;
+--font-family-en: 'Helvetica Neue',
+helvetica,
+arial,
+'Segoe UI',
+sans-serif;
+
+// Font Size
+--font-size-3xl: #{responsive-size(375, 1440, 26, 36, 'rem')};
+--font-size-2xl: #{responsive-size(375, 1440, 22, 28, 'rem')};
+--font-size-xl: #{responsive-size(375, 1440, 20, 22, 'rem')};
+--font-size-l: 1.8rem;
+--font-size-m: 1.6rem;
+--font-size-s: 1.4rem;
+--font-size-xs: 1.2rem;
+--font-size-2xs: 1rem;
+
+// Font Size (Specific)
+--font-size-headline: #{responsive-size(375, 1440, 40, 80, 'rem')};
+--font-size-button: 1.5rem;
+
+// line-height
+--line-height-xs: 1.68;
+--line-height-s: 1.9;
+--line-height-m: 2;
+
+// line-height (Specific)
+--line-height-headline: 1.25;
+
+// border-radius
+--border-radius: 10px;
+
+// transition
+--transition-duration: 0.4s;
+--transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}

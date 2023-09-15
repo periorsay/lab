@@ -1,0 +1,36 @@
+@use '../extension' as *;
+@use '../variables' as var;
+
+body {
+  padding-right: var(--scrollbar-width, 0);
+  background-color: #fff;
+  color: var(--color-ui-black);
+  letter-spacing: 0.04em;
+  line-height: 2;
+
+  &:lang(ja) {
+    font-family: var(--font-family-ja);
+  }
+
+  &:lang(en) {
+    font-family: var(--font-family-en);
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-vi-01);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

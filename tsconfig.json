@@ -7,7 +7,8 @@
     "baseUrl": ".",
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "rehype-add-classes": ["./src/types/rehype-add-classes"]
     }
   }
 }

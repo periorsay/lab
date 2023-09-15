@@ -1,0 +1,202 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'functions' as *;
+
+
+$break-points: (
+  'sm': 575,
+  'md': 767,
+  'lg': 991,
+  'xl': 1440,
+  ) !default;
+
+@mixin mq-min($_break-point, $unit: px) {
+  $break-point: meta.inspect($_break-point
+  );
+
+@if map-has-key($break-points, $_break-point) {
+  $break-point: map.get($break-points, $_break-point) + 1;
+}
+
+@else if type-of($_break-point) !='number' {
+  @error '#{ $_break-point } is not a number.';
+}
+
+@media screen and (min-width: #{$break-point}#{$unit}) {
+  @content;
+}
+}
+
+@mixin mq-max($_break-point, $unit: px) {
+  $break-point: meta.inspect($_break-point);
+
+  @if map-has-key($break-points, $_break-point) {
+    $break-point: map.get($break-points, $_break-point);
+  }
+
+  @else if type-of($_break-point) !='number' {
+    @error '#{ $_break-point } is not a number.';
+  }
+
+  @media screen and (max-width: #{$break-point}#{$unit}) {
+    @content;
+  }
+}
+
+@mixin mq-min-max($_min, $_max) {
+  $min: meta.inspect($_min);
+  $max: meta.inspect($_max);
+
+  @if map-has-key($break-points, $_min) {
+    $min: map.get($break-points, $_min) + 1;
+  }
+
+  @else if type-of($_min) !='number' {
+    @error '#{ $_min } is not a number.';
+  }
+
+  @if map-has-key($break-points, $_max) {
+    $max: map.get($break-points, $_max);
+  }
+
+  @else if type-of($_max) !='number' {
+    @error '#{ $_max } is not a number.';
+  }
+
+  @media screen and (min-width: #{$min}px) and (max-width: #{$max}px) {
+    @content;
+  }
+}
+
+@mixin line-clamp($count: 1) {
+  @if type-of($count) !='number' {
+    @error '#{ $count } is not a number.';
+  }
+
+  @if $count ==1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @else {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $count;
+  }
+}
+
+@mixin font($size) {
+  @if $size =='headline' {
+    font-family: var(--font-family-headline);
+    font-size: var(--font-size-headline);
+    line-height: var(--line-height-headline);
+    color: var(--color-vi-04);
+    letter-spacing: normal;
+  }
+
+  @else if $size =='h1' {
+    font-size: var(--font-size-3xl);
+    font-weight: bold;
+    line-height: var(--line-height-xs);
+  }
+
+  @else if $size =='h2' {
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    line-height: var(--line-height-xs);
+  }
+
+  @else if $size =='h3' {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    line-height: var(--line-height-xs);
+  }
+
+  @else if $size =='h4' {
+    font-size: var(--font-size-l);
+    font-weight: bold;
+  }
+
+  @else if $size =='h5' {
+    font-size: var(--font-size-m);
+    font-weight: bold;
+  }
+
+  @else if $size =='s' {
+    font-size: var(--font-size-s);
+  }
+
+  @else if $size =='xs' {
+    font-size: var(--font-size-xs);
+  }
+
+  @else if $size =='2xs' {
+    font-size: var(--font-size-2xs);
+  }
+
+  @else {
+    @error '#{ $size } is not a defined value.';
+  }
+}
+
+@mixin hover-line($addHeight: false, $parent: false, $childSpan: false, $transition: true) {
+  @if $childSpan {
+    span {
+      background: linear-gradient(currentcolor, currentcolor) 100% 100% / 0 1px no-repeat;
+
+      @if $transition {
+        transition: background-size var(--transition-duration) var(--transition-timing-function) 0s;
+      }
+
+      @if $addHeight {
+        padding-block: $addHeight;
+      }
+    }
+  }
+
+  @else {
+    background: linear-gradient(currentcolor, currentcolor) 100% 100% / 0 1px no-repeat;
+
+    @if $transition {
+      transition: background-size var(--transition-duration) var(--transition-timing-function) 0s;
+    }
+
+    @if $addHeight {
+      padding-block: $addHeight;
+    }
+  }
+
+  @media (hover: hover) {
+    @if $parent and $childSpan {
+      #{$parent}:hover & span {
+        background-position: 0 100%;
+        background-size: 100% 1px;
+      }
+    }
+
+    @else if $parent {
+      #{$parent}:hover & {
+        background-position: 0 100%;
+        background-size: 100% 1px;
+      }
+    }
+
+    @else if $childSpan {
+      &:hover {
+        span {
+          background-position: 0 100%;
+          background-size: 100% 1px;
+        }
+      }
+    }
+
+    @else {
+      &:hover {
+        background-position: 0 100%;
+        background-size: 100% 1px;
+      }
+    }
+  }
+}
