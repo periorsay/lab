@@ -1,0 +1,5 @@
+.env*.local
+/.git/
+*.md
+package.json
+package-lock.json
