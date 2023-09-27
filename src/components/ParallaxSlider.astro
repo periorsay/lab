@@ -1,0 +1,187 @@
+<!-- <svg>
+  <defs>
+    <filter id="noise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence
+        id="turbulence"
+        type="turbulence"
+        baseFrequency="0.0015 0.11"
+        numOctaves="2"
+        result="turbulence"
+      >
+      </feTurbulence>
+      <feDisplacementMap
+        in2="turbulence"
+        in="SourceGraphic"
+        scale="50"
+        xChannelSelector="R"
+        yChannelSelector="G"></feDisplacementMap>
+    </filter>
+  </defs>
+</svg> -->
+<div class="container">
+  <section class="sec">
+    <div class="images">
+      <div class="img img01">
+        <img src="/public/material/img_1.jpg" alt="" />
+      </div>
+      <div class="img img02">
+        <img src="/public/material/img_2.jpg" alt="" />
+      </div>
+      <div class="img img03">
+        <img src="/public/material/img_3.jpg" alt="" />
+      </div>
+      <div class="img img04">
+        <img src="/public/material/img_4.jpg" alt="" />
+      </div>
+      <div class="img img05">
+        <img src="/public/material/img_5.jpg" alt="" />
+      </div>
+      <div class="img img06">
+        <img src="/public/material/img_6.jpg" alt="" />
+      </div>
+      <div class="img img07">
+        <img src="/public/material/img_7.jpg" alt="" />
+      </div>
+      <div class="img img08">
+        <img src="/public/material/img_8.jpg" alt="" />
+      </div>
+      <div class="img img09">
+        <img src="/public/material/img_9.jpg" alt="" />
+      </div>
+      <div class="img img10">
+        <img src="/public/material/img_10.jpg" alt="" />
+      </div>
+      <div class="img img11">
+        <img src="/public/material/img_11.jpg" alt="" />
+      </div>
+      <div class="img img12">
+        <img src="/public/material/img_12.jpg" alt="" />
+      </div>
+      <div class="img img13">
+        <img src="/public/material/img_13.jpg" alt="" />
+      </div>
+      <div class="img img14">
+        <img src="/public/material/img_14.jpg" alt="" />
+      </div>
+      <div class="img img15">
+        <img src="/public/material/img_15.jpg" alt="" />
+      </div>
+      <div class="img img16">
+        <img src="/public/material/img_16.jpg" alt="" />
+      </div>
+      <div class="img img17">
+        <img src="/public/material/img_17.jpg" alt="" />
+      </div>
+      <div class="img img18">
+        <img src="/public/material/img_18.jpg" alt="" />
+      </div>
+      <div class="img img19">
+        <img src="/public/material/img_19.jpg" alt="" />
+      </div>
+      <div class="img img20">
+        <img src="/public/material/img_20.jpg" alt="" />
+      </div>
+      <div class="img img21">
+        <img src="/public/material/img_21.jpg" alt="" />
+      </div>
+      <div class="img img22">
+        <img src="/public/material/img_22.jpg" alt="" />
+      </div>
+      <div class="img img23">
+        <img src="/public/material/img_23.jpg" alt="" />
+      </div>
+      <div class="img img24">
+        <img src="/public/material/img_24.jpg" alt="" />
+      </div>
+      <div class="img img25">
+        <img src="/public/material/img_25.jpg" alt="" />
+      </div>
+    </div>
+  </section>
+</div>
+
+<style lang="scss">
+  .container {
+    height: 100dvh;
+  }
+  .sec {
+    display: flex;
+  }
+  .images {
+    display: flex;
+    gap: 1rem;
+  }
+  .img {
+    // aspect-ratio: 3/4;
+    width: 250px;
+    height: 50dvh;
+    overflow: hidden;
+
+    // filter: url(#noise);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const container = document.querySelector<HTMLDivElement>('.container');
+  const imgs = gsap.utils.toArray('.img');
+
+  console.dir(container);
+  console.log(container.scrollWidth);
+  console.log(document.documentElement.clientWidth);
+  console.log(container.scrollWidth - document.documentElement.clientWidth);
+
+  // タイムラインの初期値を設定
+  let tl = gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: 'top top',
+        end: '+=100%',
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        // markers: true,
+      },
+    })
+    .to(container, {
+      duration: 1,
+      x: () => -(container.scrollWidth - document.documentElement.clientWidth) + 'px',
+      ease: 'none',
+    });
+
+  imgs.forEach((img) => {
+    gsap.to('img', {
+      objectPosition: '0% 50%',
+
+      scrollTrigger: {
+        trigger: img,
+        containerAnimation: tl,
+        // markers: true,
+        scrub: 1,
+      },
+    });
+  });
+
+  // gsap.to(container, {
+  //   autoAlpha: 1,
+  //   scrollTrigger: {
+  //     trigger: container,
+  //     start: 'top top',
+  //     // end: '+=100%',
+  //     scrub: 1,
+  //     anticipatePin: 1,
+  //     pin: true,
+  //     markers: true,
+  //   },
+  // });
+</script>

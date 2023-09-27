@@ -1,0 +1,32 @@
+---
+
+---
+
+<div class="container">
+  <h1 class="js-splitText">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem, quod nisi recusandae
+    commodi rem eveniet ipsa temporibus voluptates expedita voluptate vel facilis sint amet id
+    suscipit sapiente nesciunt est! Ea!
+  </h1>
+</div>
+
+<style lang="scss">
+  .container {
+    height: 100dvh;
+    color: #fff;
+    display: grid;
+    place-content: center;
+    // overflow: hidden;
+  }
+</style>
+
+<script>
+  const splitTexts = document.querySelectorAll<HTMLElement>('.js-splitText');
+  [...splitTexts].forEach((splitText) => {
+    const splits = splitText.innerText.split('');
+    const text = splits
+      .map((split: string) => `<span>${split.replace(/\r?\n/g, '&nbsp;')}</span>`)
+      .join('');
+    splitText.innerHTML = text;
+  });
+</script>

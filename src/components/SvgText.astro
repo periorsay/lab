@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="sec">
+    <svg
+      viewBox="0 0 1280 274"
+      width="100%"
+      height="100%"
+      preserveAspectRatio="none"
+      class="js-trigger"
+    >
+      <defs>
+        <path d="M0 1C515.204 362.686 795.548 364.646 1280 1" id="textPath"></path>
+      </defs>
+
+      <text>
+        <textPath href="#textPath" startOffset="-100%" class="svgText">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur ad quos, earum sed
+        </textPath>
+      </text>
+    </svg>
+  </div>
+
+  <div class="sec"></div>
+</div>
+
+<style lang="scss">
+  .sec {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to('.svgText', {
+    attr: { startOffset: '100%' },
+    scrollTrigger: {
+      trigger: '.js-trigger',
+      start: 'top top+=40%',
+      scrub: true,
+      // markers: true,
+    },
+  });
+</script>

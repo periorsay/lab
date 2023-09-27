@@ -1,0 +1,123 @@
+<header>
+  <nav id="nav" aria-hidden="true" class="nav">
+    <ul>
+      <li>
+        <a href="/">home</a>
+      </li>
+      <li>
+        <a href="/">about</a>
+      </li>
+      <li>
+        <a href="/">news</a>
+      </li>
+      <li>
+        <a href="/">contact</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- メニューが閉じてるときはメニューを開くにする -->
+  <button
+    type="button"
+    class="hamburgerButton"
+    aria-label="メニューを開く"
+    aria-controls="nav"
+    aria-expanded="false"
+  >
+    ハンバーガーボタン
+  </button>
+</header>
+
+<section>01</section>
+<section>02</section>
+<section>03</section>
+<section>04</section>
+<section>05</section>
+
+<style lang="scss">
+  section {
+    height: 100svh;
+    &:nth-child(odd) {
+      background-color: olive;
+    }
+    &:nth-child(even) {
+      background-color: teal;
+    }
+    display: grid;
+    place-content: center;
+    font-size: 10rem;
+  }
+
+  header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .hamburgerButton {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: red;
+    cursor: pointer;
+    &[aria-expanded='true'] {
+      background-color: blue;
+    }
+  }
+
+  .nav {
+    &[aria-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+    &[aria-hidden='false'] {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const hamburgerButton = document.querySelector<HTMLButtonElement>('.hamburgerButton');
+  const nav = document.querySelector<HTMLElement>('.nav');
+
+  let flg = false;
+
+  hamburgerButton?.addEventListener('click', () => {
+    if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
+      menuClose();
+      console.log('menuClose');
+    } else {
+      console.log('menuOpen');
+
+      menuOpen();
+    }
+  });
+
+  function menuClose() {
+    // if (flg) return;
+    // flg = true;
+    console.log('menuClose');
+    hamburgerButton?.setAttribute('aria-expanded', 'false');
+    hamburgerButton?.setAttribute('aria-label', 'メニューを開く');
+    nav?.setAttribute('aria-hidden', 'true');
+    flg = false;
+    gsap.to('body', { overflow: 'auto' });
+  }
+  function menuOpen() {
+    // if (flg) return;
+    // flg = true;
+    console.log('menuOpen');
+    hamburgerButton?.setAttribute('aria-expanded', 'true');
+    hamburgerButton?.setAttribute('aria-label', 'メニューを閉じる');
+    nav?.setAttribute('aria-hidden', 'false');
+    // flg = false;
+    gsap.to('body', { overflow: 'hidden' });
+  }
+  const tgt = document.querySelector<HTMLElement>('.tgt');
+  const scrollbarWidth = window.innerWidth - document.body.clientWidth;
+</script>

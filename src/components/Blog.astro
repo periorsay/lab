@@ -1,0 +1,16 @@
+---
+import { getBlogs } from '@/libs/microcms';
+const res = await getBlogs({ fields: ['id', 'title', 'content'] });
+
+console.log(res);
+---
+
+<ul>
+  {
+    res.contents.map((blog: any) => (
+      <li>
+        <a href={blog.id}>{blog.title}</a>
+      </li>
+    ))
+  }
+</ul>
